@@ -2,7 +2,7 @@
     display: block;
     border-radius: 10px;
     padding: 5px 10px;
-    background-color: aqua;
+    background-color: burlywood;
     border-color: transparent;
     font-size: 16px;
     font-weight: bold;
@@ -12,7 +12,7 @@
 }
 
 .btn:hover {
-    box-shadow: 1px 1px 20px 3px;
+    box-shadow: 1px 1px 14px 15px burlywood;
 }
 
 input[type=radio] {
