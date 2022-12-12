@@ -1,14 +1,15 @@
 package com.example.projectinternetshop.controllers;
 
 import com.example.projectinternetshop.repositories.OrderRepository;
-import com.example.projectinternetshop.enumm.Status;
 import com.example.projectinternetshop.models.Cart;
 import com.example.projectinternetshop.models.Order;
 import com.example.projectinternetshop.models.Product;
+import com.example.projectinternetshop.repositories.StatusRepository;
 import com.example.projectinternetshop.security.PersonDetails;
 import com.example.projectinternetshop.services.CartService;
 import com.example.projectinternetshop.services.OrderService;
 import com.example.projectinternetshop.services.ProductService;
+import com.example.projectinternetshop.services.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,13 +31,19 @@ public class OrdersController {
     private final ProductService productService;
     private final OrderRepository orderRepository;
 
+    private final StatusService statusService;
+    private final StatusRepository statusRepository;
+
     @Autowired
     public OrdersController(OrderService orderService, CartService cartService, ProductService productService,
-                            OrderRepository orderRepository) {
+                            OrderRepository orderRepository, StatusService statusService,
+                            StatusRepository statusRepository) {
         this.orderService = orderService;
         this.cartService = cartService;
         this.productService = productService;
         this.orderRepository = orderRepository;
+        this.statusService = statusService;
+        this.statusRepository = statusRepository;
     }
 
     @GetMapping("")
@@ -66,7 +73,7 @@ public class OrdersController {
         String uuid = UUID.randomUUID().toString();
 
         for (Product product: productList) {
-            Order newOrder = new Order(uuid, 1, product.getPrice(), Status.Оформлен, product, personDetails().getPerson());
+            Order newOrder = new Order(uuid, 1, product.getPrice(), statusService.findAll().get(1), product, personDetails().getPerson());
 
             orderService.addOrders(newOrder);
             cartService.deleteCartById(product.getId(), personId);

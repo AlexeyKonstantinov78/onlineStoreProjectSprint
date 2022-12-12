@@ -1,9 +1,10 @@
 package com.example.projectinternetshop.models;
 
-import com.example.projectinternetshop.enumm.Status;
+
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -20,6 +21,7 @@ public class Order {
 
     private LocalDateTime dateTime;
 
+    @ManyToOne(optional = false)
     private Status status;
 
     @ManyToOne(optional = false)
