@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Редактировние продукта</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+  <div class="container">
+    <header th:insert="~{loyout :: header}"></header>
+  </div>
+  <section class="product__edit_section">
+    <div class="container product__edit_container">
+      <h2 class="product__edit_name">Редактировние продукта</h2>
+      <form class="form" th:method="POST" th:action="@{/admin/product/edit/{id}(id=${editProduct.getId()})}" th:object="${editProduct}" enctype="multipart/form-data" >
+        <label for="title">Введите наименование: </label>
+        <input class="input__form" type="text" th:field="*{title}" name="title" id="title" placeholder="Наименование" />
+        <div class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+
+        <label for="description">Введите описание: </label>
+        <textarea name="description" id="description" th:field="*{description}" placeholder="Описание" ></textarea>
+        <div class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+
+        <label for="price">Введите цену: </label>
+        <input class="input__form" type="number" th:field="*{price}" name="price" id="price" placeholder="Цена" min="1" step="0.00"/>
+        <div class="error" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+
+        <label for="warehouse">Введите наименование склада: </label>
+        <input class="input__form" type="text" th:field="*{warehouse}" name="warehouse" id="warehouse" placeholder="Склад" />
+        <div class="error" th:if="${#fields.hasErrors('warehouse')}" th:errors="*{warehouse}"></div>
+
+        <label for="category">Выбирите категорию товара: </label>
+        <select name="category" id="category" th:field="*{category}" >
+          <option value=""></option>
+          <div th:each="category : ${categories}">
+            <option th:value="${category.getId()}" th:text="${category.getName()}"></option>
+          </div>
+        </select>
+        <div class="error" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></div>
+
+        <label for="seller">Введите продавца: </label>
+        <textarea name="seller" id="seller" th:field="*{seller}" placeholder="Продавец" ></textarea>
+        <div class="error" th:if="${#fields.hasErrors('seller')}" th:errors="*{seller}"></div>
+
+        <div class="info_product__items">
+          <div th:if="${editProduct.imageList.size() > 0}" th:each="img: ${editProduct.getImageList()}">
+            <img th:src="'/img/' + ${img.getFileName()}" width="200px" th:alt="${img.getFileName()}">
+          </div>
+        </div>
+
+        <label for="file">Загрузить фото: </label>
+        <input type="file" name="file_one" id="file" multiple accept="image/*">
+
+        <button class="btn" type="submit">Редактировать</button>
+
+      </form>
+    </div>
+  </section>
+  <div class="container">
+    <footer th:insert="~{loyout :: footer}"></footer>
+  </div>
+</body>
+</html>

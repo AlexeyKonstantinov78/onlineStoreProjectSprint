@@ -1,0 +1,33 @@
+.user_info_h2 {
+    margin-bottom: 20px;
+}
+
+
+.user_info_description p {
+    margin-bottom: 10px;
+}
+
+.user_info_flex {
+    display: flex;
+    gap: 5px;
+}
+
+.user_info_flex strong {
+    min-width: 115px;
+
+}
+
+.info_product__items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start ;
+    align-items: center;
+    gap: 5px;
+    padding: 15px 0;
+}
+
+.info_product__galary img {
+    width: 200px;
+    height: 218px;
+    object-fit: contain;
+}

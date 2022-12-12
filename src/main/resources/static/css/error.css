@@ -1,0 +1,7 @@
+.error {
+    color: tomato;
+    background-color: azure;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+}

@@ -1,0 +1,17 @@
+@import 'normalize.css';
+@import 'default.css';
+@import 'error.css';
+@import 'btn.css';
+@import "header.css";
+@import "footer.css";
+@import 'form.css';
+@import 'style.css';
+@import 'login.css';
+@import 'registration.css';
+@import 'admin.css';
+@import 'searchProduct.css';
+@import 'editProduct.css';
+@import 'userIndex.css';
+@import 'userInfoProduct.css';
+@import 'cart.css';
+@import 'orders.css';

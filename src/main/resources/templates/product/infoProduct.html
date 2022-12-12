@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/index.css">
+    <title>Информация о товаре</title>
+</head>
+<body>
+    <div class="container">
+        <header th:insert="~{loyout :: header}"></header>
+        <h2>Информация о товаре</h2>
+        <hr>
+        <div th:object="${product}">
+            <p th:text="'Наименование: ' + ${product.getTitle()}"></p>
+            <p th:text="'Описание: ' + ${product.getDescription()}"></p>
+            <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+            <p th:text="'Склад: ' + ${product.getWarehouse()}"></p>
+            <p th:text="'Категория: ' + ${product.getCategory().getName()}"></p>
+            <p th:text="'Подавец: ' + ${product.getSeller()}"></p>
+            <a th:href="@{/product}">Список товаров</a>
+            <div th:if="${product.imageList.size() > 0}" th:each="img: ${product.getImageList()}">
+                <img th:src="'/img/' + ${img.getFileName()}" width="200px" th:alt="${img.getFileName()}">
+            </div>
+        </div>
+        <footer th:insert="~{loyout :: footer}"></footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+.container__login {
+    margin-top: 30px;
+}
+
+.login__main {
+    height: 80vh;
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+}

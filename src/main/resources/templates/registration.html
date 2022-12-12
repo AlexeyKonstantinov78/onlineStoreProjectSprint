@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+  <div class="container registration__container">
+    <header th:insert="~{loyout :: header}"></header>
+    <main class="login__main">
+      <div class="form__block">
+        <h2>Регистрация</h2>
+        <form class="form" th:method="post" th:action="@{/auth/registration}" th:object="${person}">
+          <input class="input__form" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+          <label for="login">Введите логин: </label>
+          <input class="input__form" type="text" th:field="*{login}" placeholder="Введите логин" name="login" id="login">
+          <div style="color: red" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></div>
+          <label for="password">Введите пароль: </label>
+          <input class="input__form" type="password" th:field="*{password}" placeholder="Введите пароль" name="password" id="password">
+          <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+          <input class="btn" type="submit" value="Зарегистрироватся">
+        </form>
+        <a href="/auth/login">Вход</a>
+      </div>
+    </main>
+    <footer th:insert="~{loyout :: footer}"></footer>
+  </div>
+</body>
+</html>

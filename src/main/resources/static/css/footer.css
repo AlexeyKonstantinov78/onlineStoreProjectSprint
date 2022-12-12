@@ -1,0 +1,15 @@
+.footer__wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.footer__items_soc {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.footer__social_img {
+    border-radius: 25px;
+}

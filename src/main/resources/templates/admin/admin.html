@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Админ панель</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+    <div class="container admin__container">
+        <header th:insert="~{loyout :: header}"></header>
+        <div class="admin__title">
+            <h3 class="admin__name">Личный кабинет администратора</h3>
+
+        </div>
+        <div class="admin__panel">
+            <a class="btn btn__add" href="/admin/product/add">Добавление товара</a>
+        </div>
+
+        <h3>Каталог товаров: </h3>
+        <hr>
+        <div th:if="${products.size() == 0}" >
+            <h3>Товаров нет</h3>
+        </div >
+        <div th:if="${products.size() > 0}" th:each="product : ${products}">
+            <div class="admin__card_item" >
+                <div class="admin__img"><img th:if="${product.imageList.size() > 0}" th:src="'/img/' + ${product.imageList[0].getFileName()}" ></div>
+                <div class="admin__cards_info">
+                    <div class="admin__cards_description">
+                        <p th:text="'Наименование: ' + ${product.getTitle()}"></p>
+                        <p th:text="'Описание: ' + ${product.getDescription()}"></p>
+                        <div style="display:flex; justify-content: space-between;">
+                            <span th:text="'Цена: ' + ${product.getPrice()}"></span>
+                            <span th:text="'Категория: ' + ${product.getCategory().getName()}"></span>
+                        </div>
+                        <p th:text="'Склад: ' + ${product.getWarehouse()}"></p>
+                        <p th:text="'Подавец: ' + ${product.getSeller()}"></p>
+                    </div>
+                    <div class="admin__panel_btn_cards">
+                        <a class="btn" th:href="@{/admin/product/edit/{id}(id=${product.getId()})}">Редактировать</a>
+                        <a class="btn" th:href="@{/admin/product/delete/{id}(id=${product.getId()})}">Удалить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <footer th:insert="~{loyout :: footer}"></footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Информация о товаре</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+    <div class="container">
+        <header th:insert="~{loyout :: header}"></header>
+    </div>
+    <section>
+        <div class="container">
+            <h2 class="user_info_h2">Информация о товаре</h2>
+            <a class="btn" th:href="@{/index}">Список товаров</a>
+            <hr>
+
+            <div class="user_info_description" th:object="${product}">
+                <div class="user_info_flex">
+                    <strong>Наименование: </strong><p th:text="${product.getTitle()}"></p>
+                </div>
+                <div class="user_info_flex">
+                    <strong>Описание: </strong><p th:text="${product.getDescription()}"></p>
+                </div>
+                <div class="user_info_flex">
+                    <strong>Цена: </strong><p th:text="${product.getPrice()}"></p>
+                </div>
+                <div class="user_info_flex">
+                    <strong>Склад: </strong><p th:text="${product.getWarehouse()}"></p>
+                </div>
+                <div class="user_info_flex">
+                    <strong>Категория: </strong><p th:text="${product.getCategory().getName()}"></p>
+                </div>
+                <div class="user_info_flex">
+                    <strong>Подавец: </strong><p th:text="${product.getSeller()}"></p>
+                </div>
+                <div class="info_product__items">
+                    <div class="info_product__galary" th:if="${product.imageList.size() > 0}" th:each="img: ${product.getImageList()}">
+                        <img th:src="'/img/' + ${img.getFileName()}" th:alt="${img.getFileName()}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <footer th:insert="~{loyout :: footer}"></footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Личный кабинет пользователя</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+  <div class="container">
+      <header th:insert="~{loyout :: header}"></header>
+  </div>
+  <section class="user__section">
+      <div class="container user__container">
+
+          <div class="user__form_cartAndOrder">
+              <form th:action="@{/cart}" th:method="GET" >
+                  <input class="btn" type="submit" value="Корзина">
+              </form>
+              <form th:action="@{/orders}" th:method="GET">
+                  <input class="btn" type="submit" value="Заказы">
+              </form>
+          </div>
+
+          <div class="user__content">
+              <button class="openSearch">Найти</button>
+              <form class="search__product_form" th:method="POST" th:action="@{/product/search}">
+                  <fieldset>
+                      <legend>Выбирите параметры для сортировки, поиска, фильтрации</legend>
+                      <div class="search__product_inname">
+                          <label for="search">Поиск по наименованию</label>
+                          <input class="search__input" type="search" name="search" id="search" th:value="*{search}"/>
+                      </div>
+
+                      <div class="search__product_betvweenandsort">
+                          <div class="search__product_price">
+                              <p>Цена, ₽</p>
+                              <label for="ot">От</label>
+                              <input class="search__input" type="text" name="ot" id="ot" th:value="*{ot}">
+                              <label for="do">До</label>
+                              <input class="search__input" type="text" name="do" id="do" th:value="*{Do}">
+                          </div>
+
+                          <div class="search__product_ascdescprice">
+
+                              <label for="ascending_price"><input type="radio" name="price_sort" id="ascending_price" value="ascending_price">По возрастанию цены</label>
+
+                              <label for="descending_price"><input type="radio" name="price_sort" id="descending_price" value="descending_price">По убыванию цене</label>
+                          </div>
+
+                          <div class="search__product_category">
+                              <p>Категория товаров: </p>
+
+                              <input type="radio" name="category" id="furniture" value="furniture">
+                              <label for="furniture">Мебель</label>
+
+                              <input type="radio" name="category" id="appliances" value="appliances">
+                              <label for="appliances">Бытовая техника</label>
+
+                              <input type="radio" name="category" id="clothes" value="clothes">
+                              <label for="clothes">Одежда</label>
+                          </div>
+                      </div>
+
+                      <input class="btn" type="submit" value="Найти">
+                  </fieldset>
+              </form>
+          </div>
+
+          <h2 class="user__content_name">Список товаров: </h2>
+          <div th:if="${search_products}">
+              <hr>
+              <div th:if="${search_products.size() == 0}">
+                  <h2>Ничего нет</h2>
+              </div>
+              <div th:if="${search_products.size() > 0}">
+                  <h2>Результат</h2>
+              </div>
+              <div class="user__items">
+                  <div th:each="product : ${search_products}">
+                      <div class="user__item">
+                          <a th:href="@{/product/info/{id}(id=${product.getId()})}" >
+                              <div class="user__item_img">
+                                  <img th:if="${product.imageList.size() > 0}" th:src="'/img/' + ${product.imageList[0].getFileName()}" >
+                              </div>
+                              <p th:text="'Наименование: '"></p>
+                              <p th:text="${product.getTitle()}"></p>
+                              <strong th:text="'Категория: '"></strong>
+                              <p th:text="${product.getCategory().getName()}"></p>
+                              <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+                          </a>
+                          <a class="btn user_btn" th:href="@{/cart/add/{id}(id=${product.getId()})}" >Добавить в корзину</a>
+                      </div>
+                  </div>
+              </div>
+              <hr>
+          </div>
+          <div th:if="${products}">
+              <hr>
+              <div class="user__items">
+                  <div th:each="product : ${products}">
+                      <div class="user__item">
+                          <a th:href="@{/product/info/{id}(id=${product.getId()})}" >
+                              <div class="user__item_img">
+                                  <img th:if="${product.imageList.size() > 0}" th:src="'/img/' + ${product.imageList[0].getFileName()}" >
+                              </div>
+                              <p th:text="'Наименование: '"></p>
+                              <p th:text="${product.getTitle()}"></p>
+                              <strong th:text="'Категория: '"></strong>
+                              <p th:text="${product.getCategory().getName()}"></p>
+                              <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+                          </a>
+                          <a class="btn user_btn" th:href="@{/cart/add/{id}(id=${product.getId()})}" >Добавить в корзину</a>
+                      </div>
+                  </div>
+              </div>
+              <hr>
+          </div>
+      </div>
+  </section>
+  <div class="container">
+      <footer th:insert="~{loyout :: footer}"></footer>
+  </div>
+
+<!--  <a href="/logout">Выход</a>-->
+<!--//при использовании csrf.token защиты разлогинится можно только через пост отправку запроса -->
+  <script src="/js/searchProduct.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Корзина заказов</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+    <div class="container">
+        <header th:insert="~{loyout :: header}"></header>
+        <main class="cart__main">
+            <h2>Корзина товаров</h2>
+            <div class="user__items cart__items">
+                <div th:each="product : ${cart}">
+                    <div class="user__item cart__item">
+                        <a class="btn cart__del" th:href="@{/cart/delete/{id}(id=${product.getId()})}">X</a>
+                        <a th:href="@{/product/info/{id}(id=${product.getId()})}" >
+                            <div class="user__item_img">
+                                <img th:if="${product.imageList.size() > 0}" th:src="'/img/' + ${product.imageList[0].getFileName()}" >
+                            </div>
+                            <p th:text="'Наименование: '"></p>
+                            <p th:text="${product.getTitle()}"></p>
+                            <strong th:text="'Категория: '"></strong>
+                            <p th:text="${product.getCategory().getName()}"></p>
+                            <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <p class="cart__price" th:text="'Количество заказов: ' + ${cart.size()} + ', на сумму: ' + ${totalPrice}"></p>
+            <a class="btn" th:href="@{/orders/create}">Оформить заказ</a>
+        </main>
+        <footer th:insert="~{loyout :: footer}"></footer>
+    </div>
+</body>
+</html>
