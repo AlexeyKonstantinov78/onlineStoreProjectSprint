@@ -45,12 +45,5 @@ public class Image {
         this.product = product;
     }
 
-    @Override
-    public String toString() {
-        return "Image{" +
-                "id=" + id +
-                ", fileName='" + fileName + '\'' +
-                ", product=" + product +
-                '}';
-    }
+
 }
