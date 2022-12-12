@@ -5,7 +5,6 @@
 .user__form_cartAndOrder {
     display: flex;
     gap: 10px;
-    margin-bottom: 20px;
 }
 
 .user__content {

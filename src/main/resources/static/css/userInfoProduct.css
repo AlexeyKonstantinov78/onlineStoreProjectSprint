@@ -1,7 +1,10 @@
+.user__main {
+    min-height: 85vh;
+}
+
 .user_info_h2 {
     margin-bottom: 20px;
 }
-
 
 .user_info_description p {
     margin-bottom: 10px;
@@ -10,11 +13,15 @@
 .user_info_flex {
     display: flex;
     gap: 5px;
+    font-size: 20px;
 }
 
 .user_info_flex strong {
-    min-width: 115px;
+    min-width: 160px;
+}
 
+.user__info_productDescription {
+    text-align: justify;
 }
 
 .info_product__items {

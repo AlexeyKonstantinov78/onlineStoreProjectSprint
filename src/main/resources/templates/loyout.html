@@ -13,6 +13,16 @@
           </div>
           <a th:if="!${person}" class="header__link" th:href="@{/product}">Товары</a>
       </li>
+      <li th:if="${person}">
+          <div th:if="${person.getPerson().getRole().equals('ROLE_USER')}" class="user__form_cartAndOrder">
+              <form th:action="@{/cart}" th:method="GET" >
+                  <input class="btn" type="submit" value="Корзина">
+              </form>
+              <form th:action="@{/orders}" th:method="GET">
+                  <input class="btn" type="submit" value="Заказы">
+              </form>
+          </div>
+      </li>
       <li >
           <a th:if="!${person}" class="header__link" th:href="@{/auth/login}">Авторизоваться</a>
           <a th:if="${person}" class="header__link" >
