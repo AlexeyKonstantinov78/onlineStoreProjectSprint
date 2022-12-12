@@ -59,7 +59,7 @@ public class AdminController {
     public String addProduct(Model model) {
         model.addAttribute("product", new Product());
         model.addAttribute("categories", categoryService.findAll());
-
+        model.addAttribute("person", personDetails());
         return "product/addProduct";
     }
     @PostMapping("product/add")
