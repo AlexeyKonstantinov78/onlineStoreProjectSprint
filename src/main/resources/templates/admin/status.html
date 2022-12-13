@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Перечень статусов товара</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+    <div class="container">
+        <header th:insert="~{loyout :: header}"></header>
+        <main class="status__main">
+            <h2>Перечень статусов товара</h2>
+            <hr>
+            <ul class="status__ul">
+                <li class="status__li">Номер</li>
+                <li>Название</li>
+            </ul>
+            <div class="status__items" th:each="item: ${statusProduct}">
+                <div class="status__item">
+                    <div class="status__item_name">
+                        <p class="status__item_nameNumber" th:text="${item.getId()}"></p>
+                        <p th:text="${item.getStatus()}"></p>
+                    </div>
+                    <a class="btn" th:href="@{/admin/status/edit/{id}(id=${item.getId()})}">Редактировать статус</a>
+                </div>
+            </div>
+            <hr>
+            <a class="btn" href="/admin/status/add">Добавление статуса</a>
+        </main>
+        <footer th:insert="~{loyout :: footer}"></footer>
+    </div>
+</body>
+</html>

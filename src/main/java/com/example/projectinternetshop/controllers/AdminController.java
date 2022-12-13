@@ -1,9 +1,11 @@
 package com.example.projectinternetshop.controllers;
 
 import com.example.projectinternetshop.models.Product;
+import com.example.projectinternetshop.models.Status;
 import com.example.projectinternetshop.security.PersonDetails;
 import com.example.projectinternetshop.services.CategoryService;
 import com.example.projectinternetshop.services.ProductService;
+import com.example.projectinternetshop.services.StatusService;
 import com.example.projectinternetshop.util.ProductValidator;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,10 +29,13 @@ public class AdminController {
 
     private final CategoryService categoryService;
 
-    public AdminController(ProductValidator productValidator, ProductService productService, CategoryService categoryService) {
+    private final StatusService statusService;
+
+    public AdminController(ProductValidator productValidator, ProductService productService, CategoryService categoryService, StatusService statusService) {
         this.productValidator = productValidator;
         this.productService = productService;
         this.categoryService = categoryService;
+        this.statusService = statusService;
     }
 
     //@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
@@ -99,6 +104,51 @@ public class AdminController {
         productService.updateProduct(id, product);
 
         return "redirect:/admin";
+    }
+    // статус
+    @GetMapping("/status")
+    public String allStatus(Model model) {
+        model.addAttribute("statusProduct", statusService.findAll());
+        model.addAttribute("person", personDetails());
+        return "admin/status";
+    }
+
+    @GetMapping("/status/add")
+    public String addStatus(Model model) {
+        model.addAttribute("statusProduct", new Status());
+        model.addAttribute("person", personDetails());
+        return "admin/addStatus";
+    }
+
+    @PostMapping("/status/add")
+    public String saveStatus(@ModelAttribute("statusProduct") @Valid Status status, BindingResult bindingResult, Model model) throws IOException {
+        model.addAttribute("person", personDetails());
+        if (bindingResult.hasErrors()) {
+            return "admin/addStatus";
+        }
+        statusService.saveStatus(status);
+        return "redirect:/admin/status";
+    }
+
+    // Коректировка
+    @GetMapping("/status/edit/{id}")
+    public String editStatus(@PathVariable("id") int id, Model model) {
+        model.addAttribute("person", personDetails());
+        model.addAttribute("statusProduct", statusService.getStatusById(id));
+        return "admin/editStatus";
+    }
+
+    @PostMapping("/status/edit/{id}")
+    public String editStatus(@PathVariable("id") int id, @ModelAttribute("statusProduct") @Valid Status status, BindingResult bindingResult, Model model) throws IOException {
+
+        model.addAttribute("person", personDetails());
+
+        if (bindingResult.hasErrors()) {
+            return "admin/editStatus";
+        }
+        statusService.updateStatus(id, status);
+
+        return "redirect:/admin/status";
     }
 
     protected PersonDetails personDetails() {

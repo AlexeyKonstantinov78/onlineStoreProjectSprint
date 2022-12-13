@@ -1,6 +1,7 @@
 package com.example.projectinternetshop.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Entity
@@ -10,7 +11,7 @@ public class Status {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-
+    @NotEmpty(message = "Статус не может быть пустым")
     private String status;
 
     @OneToMany(mappedBy = "status")

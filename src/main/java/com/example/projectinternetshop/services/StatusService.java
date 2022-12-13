@@ -21,4 +21,19 @@ public class StatusService {
     public List<Status> findAll(){
         return statusRepository.findAll();
     }
+
+    public Status getStatusById(int id) {
+        return statusRepository.findById(id).orElse(null);
+    }
+
+    @Transactional
+    public void saveStatus(Status status) {
+        statusRepository.save(status);
+    }
+
+    @Transactional
+    public void updateStatus(int id, Status status) {
+        status.setId(id);
+        statusRepository.save(status);
+    }
 }
