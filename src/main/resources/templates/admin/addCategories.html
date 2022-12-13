@@ -3,14 +3,29 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Title</title>
+  <title>Добавление категрии товара</title>
   <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
 <div class="container">
   <header th:insert="~{loyout :: header}"></header>
-  <main>
+  <main class="categories__main">
+    <h2>Добавление категрии товара</h2>
+    <hr>
+    <form class="form" th:method="POST" th:action="@{/admin/categories/add}" th:object="${categories}">
+      <div class="categories__items categories__items_add">
+        <label for="name">Введите название категории продуктов: </label>
+        <input class="input__form status_name" type="text" th:field="*{name}" placeholder="Введите название категории" name="name" id="name">
+        <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
 
+        <label for="description">Введите описание категории продуктов: </label>
+        <textarea class="input__form status_name" th:field="*{description}" name="description" id="description"></textarea>
+        <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
+      </div>
+      <input class="btn" type="submit" value="Добавить категорию">
+      <hr>
+    </form>
   </main>
   <footer th:insert="~{loyout :: footer}"></footer>
 </div>

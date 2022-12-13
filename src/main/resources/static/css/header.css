@@ -14,6 +14,10 @@
     cursor: pointer;
 }
 
+.header__link_activ {
+    color: #ff956e;
+}
+
 .header__link form {
     z-index: 0;
     display: flex;

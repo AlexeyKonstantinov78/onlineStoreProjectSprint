@@ -3,14 +3,29 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Title</title>
+    <title>Категории товаров</title>
     <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
     <div class="container">
         <header th:insert="~{loyout :: header}"></header>
-        <main>
-
+        <main class="categories__main">
+            <h2>Категории товаров</h2>
+            <hr>
+                <div class="categories__items">
+                    <div class="categories__item" th:each="category : ${categories}" >
+                        <div class="categories__item_">
+                            <div class="categories__item_title">
+                                <p class="categories__id" th:text="'Номер: ' + ${category.getId()}"></p>
+                                <p class="categories__title" th:text="'Наименование: ' + ${category.getName()}"></p>
+                            </div>
+                            <p class="categories__descriptions" th:text="'Описание: ' + ${category.getDescription()}"></p>
+                        </div>
+                        <a class="btn" th:href="@{/admin/categories/edit/{id}(id=${category.getId()})}">Редактировать</a>
+                    </div>
+                </div>
+            <hr>
+            <a class="btn btn__add" href="/admin/categories/add">Добавление категории</a>
         </main>
         <footer th:insert="~{loyout :: footer}"></footer>
     </div>

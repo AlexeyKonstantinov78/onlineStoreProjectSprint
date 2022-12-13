@@ -21,4 +21,18 @@ public class CategoryService {
     public List<Category> findAll() {
         return categoryRepository.findAll();
     }
+
+    public Category getCategoryById(int id) {
+        return categoryRepository.findById(id).orElse(null);
+    }
+
+    @Transactional
+    public void saveCategories(Category category) {
+        categoryRepository.save(category);
+    }
+    @Transactional
+    public void updateCategories(int id, Category category) {
+        category.setId(id);
+        categoryRepository.save(category);
+    }
 }

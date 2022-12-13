@@ -8,7 +8,29 @@
   <ul class="header__items" th:fragment="header">
       <li>
           <div th:if="${person}">
-              <a th:if="${person.getPerson().getRole().equals('ROLE_ADMIN')}" class="header__link" th:href="@{/admin}">Список товаров</a>
+              <div th:if="${person.getPerson().getRole().equals('ROLE_ADMIN')}">
+                  <div th:if="${products_link_activ}">
+                      <a class="header__link header__link_activ" th:href="@{/admin}">Список товаров</a>
+                      <a class="header__link" href="/admin/categories">Категории товаров</a>
+                      <a class="header__link" href="/admin/status">Статусы заказов</a>
+                  </div>
+                  <div th:if="${categories_link_activ}">
+                      <a class="header__link" th:href="@{/admin}">Список товаров</a>
+                      <a class="header__link header__link_activ" href="/admin/categories">Категории товаров</a>
+                      <a class="header__link" href="/admin/status">Статусы заказов</a>
+                  </div>
+                  <div th:if="${statusProduct_link_activ}">
+                      <a class="header__link" th:href="@{/admin}">Список товаров</a>
+                      <a class="header__link" href="/admin/categories">Категории товаров</a>
+                      <a class="header__link header__link_activ" href="/admin/status">Статусы заказов</a>
+                  </div>
+                  <div th:if="!${products_link_activ} and !${categories_link_activ} and !${statusProduct_link_activ}">
+                      <a class="header__link" th:href="@{/admin}">Список товаров</a>
+                      <a class="header__link" href="/admin/categories">Категории товаров</a>
+                      <a class="header__link" href="/admin/status">Статусы заказов</a>
+                  </div>
+              </div>
+
               <a th:if="!${person.getPerson().getRole().equals('ROLE_ADMIN')}" class="header__link" th:href="@{/product}">Товары</a>
           </div>
           <a th:if="!${person}" class="header__link" th:href="@{/product}">Товары</a>

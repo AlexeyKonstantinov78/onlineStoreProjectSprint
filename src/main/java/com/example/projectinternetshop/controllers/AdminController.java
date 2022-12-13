@@ -54,6 +54,7 @@ public class AdminController {
         if (role.equals("ROLE_USER")) {
             return "redirect:/index";
         }
+        model.addAttribute("products_link_activ", "products_link_activ");
         model.addAttribute("person", personDetails());
         model.addAttribute("products", productService.getAllProductSortId());
 
@@ -62,6 +63,7 @@ public class AdminController {
 
     @GetMapping("product/add")
     public String addProduct(Model model) {
+        model.addAttribute("products_link_activ", "products_link_activ");
         model.addAttribute("product", new Product());
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("person", personDetails());
@@ -69,6 +71,8 @@ public class AdminController {
     }
     @PostMapping("product/add")
     public String addProduct(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult, @RequestParam("file_one") List<MultipartFile> file_one, Model model) throws IOException {
+        model.addAttribute("person", personDetails());
+        model.addAttribute("products_link_activ", "products_link_activ");
         productValidator.validate(product, bindingResult);
         if (bindingResult.hasErrors()) {
             model.addAttribute("categories", categoryService.findAll());
@@ -91,11 +95,13 @@ public class AdminController {
         model.addAttribute("editProduct", productService.getProductById(id));
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("person", personDetails());
+        model.addAttribute("products_link_activ", "products_link_activ");
         return "product/editProduct";
     }
     @PostMapping("/product/edit/{id}")
     public String editProduct(@PathVariable("id") int id, @ModelAttribute("editProduct") @Valid Product product, BindingResult bindingResult, @RequestParam("file_one") List<MultipartFile> file_one, Model model) {
-
+        model.addAttribute("person", personDetails());
+        model.addAttribute("products_link_activ", "products_link_activ");
         if (bindingResult.hasErrors()) {
             model.addAttribute("categories", categoryService.findAll());
             return "product/editProduct";
@@ -109,6 +115,7 @@ public class AdminController {
     @GetMapping("/status")
     public String allStatus(Model model) {
         model.addAttribute("statusProduct", statusService.findAll());
+        model.addAttribute("statusProduct_link_activ", "statusProduct_link_activ");
         model.addAttribute("person", personDetails());
         return "admin/status";
     }
@@ -117,12 +124,14 @@ public class AdminController {
     public String addStatus(Model model) {
         model.addAttribute("statusProduct", new Status());
         model.addAttribute("person", personDetails());
+        model.addAttribute("statusProduct_link_activ", "statusProduct_link_activ");
         return "admin/addStatus";
     }
 
     @PostMapping("/status/add")
     public String saveStatus(@ModelAttribute("statusProduct") @Valid Status status, BindingResult bindingResult, Model model) throws IOException {
         model.addAttribute("person", personDetails());
+        model.addAttribute("statusProduct_link_activ", "statusProduct_link_activ");
         if (bindingResult.hasErrors()) {
             return "admin/addStatus";
         }
@@ -135,12 +144,13 @@ public class AdminController {
     public String editStatus(@PathVariable("id") int id, Model model) {
         model.addAttribute("person", personDetails());
         model.addAttribute("statusProduct", statusService.getStatusById(id));
+        model.addAttribute("statusProduct_link_activ", "statusProduct_link_activ");
         return "admin/editStatus";
     }
 
     @PostMapping("/status/edit/{id}")
     public String editStatus(@PathVariable("id") int id, @ModelAttribute("statusProduct") @Valid Status status, BindingResult bindingResult, Model model) throws IOException {
-
+        model.addAttribute("statusProduct_link_activ", "statusProduct_link_activ");
         model.addAttribute("person", personDetails());
 
         if (bindingResult.hasErrors()) {
