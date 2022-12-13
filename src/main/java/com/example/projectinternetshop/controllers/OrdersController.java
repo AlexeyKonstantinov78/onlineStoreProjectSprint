@@ -73,7 +73,7 @@ public class OrdersController {
         String uuid = UUID.randomUUID().toString();
 
         for (Product product: productList) {
-            Order newOrder = new Order(uuid, 1, product.getPrice(), statusService.findAll().get(1), product, personDetails().getPerson());
+            Order newOrder = new Order(uuid, 1, product.getPrice(), statusService.findAll().get(0), product, personDetails().getPerson());
 
             orderService.addOrders(newOrder);
             cartService.deleteCartById(product.getId(), personId);

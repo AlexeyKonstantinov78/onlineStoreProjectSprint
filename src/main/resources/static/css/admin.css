@@ -12,6 +12,11 @@
 
 .admin__panel {
     margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .admin__card_item {
