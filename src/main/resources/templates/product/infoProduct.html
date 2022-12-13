@@ -9,35 +9,20 @@
 <body>
     <div class="container">
         <header th:insert="~{loyout :: header}"></header>
-        <main class="user__main">
-            <h2 class="user_info_h2">Информация о товаре</h2>
-            <hr>
-            <div class="user_info_description" th:object="${product}">
-                <div class="user_info_flex">
-                    <strong>Наименование: </strong><p th:text="${product.getTitle()}"></p>
-                </div>
-                <div class="user_info_flex">
-                    <strong>Описание: </strong><p class="user__info_productDescription" th:text="${product.getDescription()}"></p>
-                </div>
-                <div class="user_info_flex">
-                    <strong>Цена: </strong><p th:text="${product.getPrice()}"></p>
-                </div>
-                <div class="user_info_flex">
-                    <strong>Склад: </strong><p th:text="${product.getWarehouse()}"></p>
-                </div>
-                <div class="user_info_flex">
-                    <strong>Категория: </strong><p th:text="${product.getCategory().getName()}"></p>
-                </div>
-                <div class="user_info_flex">
-                    <strong>Подавец: </strong><p th:text="${product.getSeller()}"></p>
-                </div>
-                <div class="info_product__items">
-                    <div class="info_product__galary" th:if="${product.imageList.size() > 0}" th:each="img: ${product.getImageList()}">
-                        <img th:src="'/img/' + ${img.getFileName()}" th:alt="${img.getFileName()}">
-                    </div>
-                </div>
+        <h2>Информация о товаре</h2>
+        <hr>
+        <div th:object="${product}">
+            <p th:text="'Наименование: ' + ${product.getTitle()}"></p>
+            <p th:text="'Описание: ' + ${product.getDescription()}"></p>
+            <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+            <p th:text="'Склад: ' + ${product.getWarehouse()}"></p>
+            <p th:text="'Категория: ' + ${product.getCategory().getName()}"></p>
+            <p th:text="'Подавец: ' + ${product.getSeller()}"></p>
+            <a th:href="@{/product}">Список товаров</a>
+            <div th:if="${product.imageList.size() > 0}" th:each="img: ${product.getImageList()}">
+                <img th:src="'/img/' + ${img.getFileName()}" width="200px" th:alt="${img.getFileName()}">
             </div>
-        </main>
+        </div>
         <footer th:insert="~{loyout :: footer}"></footer>
     </div>
 </body>

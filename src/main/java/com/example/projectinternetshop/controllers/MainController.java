@@ -38,17 +38,7 @@ public class MainController {
 
     @GetMapping("/info/{id}")
     public String infoProduct(@PathVariable("id") int id, Model model) {
-
         model.addAttribute("product", productService.getProductById(id));
-
-        try {
-            if (personDetails().getPerson().getRole().equals("ROLE_USER")) {
-                return "redirect:/user/info/{id}";
-            }
-        } catch (Exception e) {
-            System.out.println("пользователь не авторизован");
-        }
-
         return "product/infoProduct";
     }
 
@@ -152,16 +142,5 @@ public class MainController {
 
         //model.addAttribute("products", productService.getAllProduct());
         return "/product/product";
-    }
-    protected PersonDetails personDetails() {
-        try {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
-            return personDetails;
-        } catch (Exception e) {
-            System.out.println("нет авторизации");
-        }
-
-        return null;
     }
 }

@@ -48,7 +48,6 @@ public class UserControler {
     @GetMapping("user/info/{id}")
     public String infoProduct(@PathVariable("id") int id, Model model) {
         model.addAttribute("product", productService.getProductById(id));
-        model.addAttribute("person", personDetails());
         return "user/infoProduct";
     }
 
