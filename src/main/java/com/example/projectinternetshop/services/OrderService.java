@@ -1,5 +1,6 @@
 package com.example.projectinternetshop.services;
 
+import com.example.projectinternetshop.models.Status;
 import com.example.projectinternetshop.repositories.OrderRepository;
 import com.example.projectinternetshop.models.Order;
 import com.example.projectinternetshop.models.Person;
@@ -23,6 +24,10 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    public Order getOrderById(int id) {
+        return orderRepository.findById(id).orElse(null);
+    }
+
     public List<Order> allOrderPerson(Person person) {
         return orderRepository.findByPerson(person);
     }
@@ -40,4 +45,12 @@ public class OrderService {
         return orderRepository.findByAllSelectNUmber();
     }
 
+    @Transactional
+    public void updateOrder(int id, Status status) {
+
+        Order order = orderRepository.findById(id).orElse(null);
+        order.setId(id);
+        order.setStatus(status);
+        orderRepository.save(order);
+    }
 }

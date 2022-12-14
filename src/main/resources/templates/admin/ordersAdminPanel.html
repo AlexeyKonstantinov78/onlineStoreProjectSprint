@@ -19,25 +19,28 @@
         </h3>
         <div th:each="order: ${orders}">
           <div th:if="${orderTitle.getNumber()}==${order.getNumber()}">
-            <a class="orders__number_item" th:href="@{/product/info/{id}(id=${order.getProduct().getId()})}" >
-              <p th:text="'id: ' + ${order.getId()}"></p>
-              <div class="orders__item_img" width="50px">
-                <img th:if="${order.getProduct().imageList.size() > 0}" th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" >
-              </div>
-              <div class="orders__product_name">
-                <p th:text="'Наименование: ' + ${order.getProduct().getTitle()}"></p>
-                <p th:text="'Количество: ' + ${order.getCount()}"></p>
-              </div>
+            <div class="orders__number_item"  >
+              <a class="orders__number_item" th:href="@{/product/info/{id}(id=${order.getProduct().getId()})}">
+                <p th:text="'id: ' + ${order.getId()}"></p>
+                <div class="orders__item_img" width="50px">
+                  <img th:if="${order.getProduct().imageList.size() > 0}" th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" >
+                </div>
+                <div class="orders__product_name">
+                  <p th:text="'Наименование: ' + ${order.getProduct().getTitle()}"></p>
+                  <p th:text="'Количество: ' + ${order.getCount()}"></p>
+                </div>
+              </a>
               <div>
                 <p th:text="'Цена: ' + ${order.getPrice()}"></p>
                 <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
                 <p th:text="'Статус: ' + ${order.getStatus().getStatus()}"></p>
               </div>
-            </a>
-
+              <div>
+                <a class="btn" th:href="@{/admin/orders/editStatus/{id}(id=${order.getId()})}">Изменить статуc</a>
+              </div>
+            </div>
           </div>
         </div>
-
       </div>
     </div>
   </main>

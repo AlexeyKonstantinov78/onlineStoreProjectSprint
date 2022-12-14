@@ -196,6 +196,25 @@ public class AdminController {
         return "admin/ordersAdminPanel";
     }
 
+    @GetMapping("/orders/editStatus/{id}")
+    public String editStatusOrder(@PathVariable("id") int id, Model model) {
+        model.addAttribute("person", personDetails());
+        model.addAttribute("orders_link_activ", "orders_link_activ");
+        model.addAttribute("order", orderService.getOrderById(id));
+        model.addAttribute("statuses", statusService.findAll());
+
+        return "admin/ordersEdit";
+    }
+
+    @PostMapping("/orders/editStatus/{id}")
+    public String updateStatusOrder(@PathVariable("id") int id, @ModelAttribute("order") Order order, @RequestParam("status") int status_id, Model model) {
+        model.addAttribute("person", personDetails());
+        model.addAttribute("orders_link_activ", "orders_link_activ");
+        orderService.updateOrder(id, order.getStatus());
+
+        return "redirect:/admin/orders";
+    }
+
     protected Boolean ordersTitleListBoolean(String number,  List<OrdersTitle> ordersTitleList) {
         for (OrdersTitle list : ordersTitleList) {
             if (list.getNumber().equals(number)) {
