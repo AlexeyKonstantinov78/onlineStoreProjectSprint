@@ -51,8 +51,8 @@ public class OrdersController {
 
         List<Order> orderList = orderService.allOrderPerson(personDetails().getPerson());
 
-        System.out.println(orderService.selectNumberOrderGroubBy().size());
-        model.addAttribute("ordersTitle", orderService.selectNumberOrderGroubBy());
+        System.out.println(orderService.selectNumberOrderGroubBy(personDetails().getPerson().getId()).size());
+        model.addAttribute("ordersTitle", orderService.selectNumberOrderGroubBy(personDetails().getPerson().getId()));
         model.addAttribute("orders", orderList);
         model.addAttribute("person", personDetails());
 

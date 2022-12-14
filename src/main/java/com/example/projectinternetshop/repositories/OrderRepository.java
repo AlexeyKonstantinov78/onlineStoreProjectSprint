@@ -12,6 +12,6 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> findByPerson(Person person);
 
-    @Query(value = "select number from orders group by number", nativeQuery = true)
-    List findByAllSelectNUmber();
+    @Query(value = "select number from orders where person_id=?1 group by number", nativeQuery = true)
+    List findByAllSelectNUmber(int idPerson);
 }

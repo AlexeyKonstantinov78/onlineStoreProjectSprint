@@ -28,8 +28,8 @@ public class OrderService {
         orderRepository.save(order);
     }
 
-    public List selectNumberOrderGroubBy() {
-        return orderRepository.findByAllSelectNUmber();
+    public List selectNumberOrderGroubBy(int idPerson) {
+        return orderRepository.findByAllSelectNUmber(idPerson);
     }
 
 }
