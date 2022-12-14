@@ -9,22 +9,32 @@
       <li>
           <div th:if="${person}">
               <div th:if="${person.getPerson().getRole().equals('ROLE_ADMIN')}">
+                  <div th:if="${orders_link_activ}">
+                      <a class="header__link header__link_activ" th:href="@{/admin/orders}">Заказы</a>
+                      <a class="header__link" th:href="@{/admin}">Список товаров</a>
+                      <a class="header__link" href="/admin/categories">Категории товаров</a>
+                      <a class="header__link" href="/admin/status">Статусы заказов</a>
+                  </div>
                   <div th:if="${products_link_activ}">
+                      <a class="header__link header__link" th:href="@{/admin/orders}">Заказы</a>
                       <a class="header__link header__link_activ" th:href="@{/admin}">Список товаров</a>
                       <a class="header__link" href="/admin/categories">Категории товаров</a>
                       <a class="header__link" href="/admin/status">Статусы заказов</a>
                   </div>
                   <div th:if="${categories_link_activ}">
+                      <a class="header__link header__link" th:href="@{/admin/orders}">Заказы</a>
                       <a class="header__link" th:href="@{/admin}">Список товаров</a>
                       <a class="header__link header__link_activ" href="/admin/categories">Категории товаров</a>
                       <a class="header__link" href="/admin/status">Статусы заказов</a>
                   </div>
                   <div th:if="${statusProduct_link_activ}">
+                      <a class="header__link header__link" th:href="@{/admin/orders}">Заказы</a>
                       <a class="header__link" th:href="@{/admin}">Список товаров</a>
                       <a class="header__link" href="/admin/categories">Категории товаров</a>
                       <a class="header__link header__link_activ" href="/admin/status">Статусы заказов</a>
                   </div>
-                  <div th:if="!${products_link_activ} and !${categories_link_activ} and !${statusProduct_link_activ}">
+                  <div th:if="!${products_link_activ} and !${categories_link_activ} and !${statusProduct_link_activ} and !${orders_link_activ}">
+                      <a class="header__link header__link" th:href="@{/admin/orders}">Заказы</a>
                       <a class="header__link" th:href="@{/admin}">Список товаров</a>
                       <a class="header__link" href="/admin/categories">Категории товаров</a>
                       <a class="header__link" href="/admin/status">Статусы заказов</a>

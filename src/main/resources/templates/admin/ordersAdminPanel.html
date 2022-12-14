@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Заказы</title>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<div class="container">
+  <header th:insert="~{loyout :: header}"></header>
+  <main class="orders__main">
+    <h2>Заказы</h2>
+    <hr>
+    <div class="orders__items">
+      <div class="orders__item" th:each="orderTitle: ${ordersTitle}">
+        <h3 class="orders__title"
+            th:text="'Пользователь: ' + ${orderTitle.getPerson().getLogin()} + ',  Заказ № ' + ${orderTitle.getNumber()} + ', Дата заказа: ' + ${#temporals.format(orderTitle.getDateTime(), 'dd-MMM-yyyy')}">
+        </h3>
+        <div th:each="order: ${orders}">
+          <div th:if="${orderTitle.getNumber()}==${order.getNumber()}">
+            <a class="orders__number_item" th:href="@{/product/info/{id}(id=${order.getProduct().getId()})}" >
+              <p th:text="'id: ' + ${order.getId()}"></p>
+              <div class="orders__item_img" width="50px">
+                <img th:if="${order.getProduct().imageList.size() > 0}" th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" >
+              </div>
+              <div class="orders__product_name">
+                <p th:text="'Наименование: ' + ${order.getProduct().getTitle()}"></p>
+                <p th:text="'Количество: ' + ${order.getCount()}"></p>
+              </div>
+              <div>
+                <p th:text="'Цена: ' + ${order.getPrice()}"></p>
+                <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
+                <p th:text="'Статус: ' + ${order.getStatus().getStatus()}"></p>
+              </div>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+  <footer th:insert="~{loyout :: footer}"></footer>
+</div>
+<script src="/js/orders.js"></script>
+</body>
+</html>

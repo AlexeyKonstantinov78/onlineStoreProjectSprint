@@ -1,11 +1,9 @@
 package com.example.projectinternetshop.controllers;
 
-import com.example.projectinternetshop.models.Product;
-import com.example.projectinternetshop.models.Status;
+import com.example.projectinternetshop.models.*;
+import com.example.projectinternetshop.repositories.ImageRepository;
 import com.example.projectinternetshop.security.PersonDetails;
-import com.example.projectinternetshop.services.CategoryService;
-import com.example.projectinternetshop.services.ProductService;
-import com.example.projectinternetshop.services.StatusService;
+import com.example.projectinternetshop.services.*;
 import com.example.projectinternetshop.util.ProductValidator;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -31,11 +31,20 @@ public class AdminController {
 
     private final StatusService statusService;
 
-    public AdminController(ProductValidator productValidator, ProductService productService, CategoryService categoryService, StatusService statusService) {
+    private final OrderService orderService;
+    private final ImageRepository imageRepository;
+
+    private final PersonService personService;
+
+    public AdminController(ProductValidator productValidator, ProductService productService, CategoryService categoryService, StatusService statusService, OrderService orderService,
+                           ImageRepository imageRepository, PersonService personService) {
         this.productValidator = productValidator;
         this.productService = productService;
         this.categoryService = categoryService;
         this.statusService = statusService;
+        this.orderService = orderService;
+        this.imageRepository = imageRepository;
+        this.personService = personService;
     }
 
     //@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
@@ -161,10 +170,67 @@ public class AdminController {
         return "redirect:/admin/status";
     }
 
+    @GetMapping("/orders")
+    public String allOrders(Model model) {
+        model.addAttribute("orders_link_activ", "orders_link_activ");
+        List<OrdersTitle> ordersTitleList = new ArrayList<>();
+        List[] list = orderService.selectNumberOrderGroubBy();
+
+        System.out.println(list.length);
+
+        for (List li: list) {
+            String[] liSplit = li.toString().split(", ");
+//            System.out.println("id: " + liSplit[0].substring(1).trim() + " number: " + liSplit[1].trim() + " Даta: " + liSplit[2].substring(0, liSplit[2].length() - 1).trim());
+            int id = Integer.parseInt(liSplit[0].substring(1).trim());
+            String number = liSplit[1].substring(0).trim();
+            LocalDate dateTime = LocalDate.parse(liSplit[2].substring(0, 10).trim());
+
+            System.out.println(number);
+//            System.out.println("" + id + ' ' + number + ' ' + dateTime);
+
+            if (!ordersTitleListBoolean(number, ordersTitleList)) {
+                ordersTitleList.add(new OrdersTitle(id, getPerson(id), number, dateTime));
+            }
+//            for (OrdersTitle orList :ordersTitleList) {
+//                if (orList.getPerson_id() != id)
+//            }
+        }
+        List<Order> orderList = orderService.allOrder();
+
+        model.addAttribute("ordersTitle", ordersTitleList);
+        model.addAttribute("orders", orderList);
+        model.addAttribute("person", personDetails());
+
+        return "admin/ordersAdminPanel";
+    }
+
+    protected Boolean ordersTitleListBoolean(String number,  List<OrdersTitle> ordersTitleList) {
+        for (OrdersTitle list : ordersTitleList) {
+            if (list.getNumber().equals(number)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     protected PersonDetails personDetails() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
 
         return personDetails;
+    }
+
+    protected Person getPerson(int id) {
+        List<Person> personList =  personService.getAll();
+        Person person = new Person();
+
+        for (Person per: personList) {
+            if (per.getId() == id){
+                person = per;
+                break;
+            }
+        }
+        
+        return person;
     }
 }

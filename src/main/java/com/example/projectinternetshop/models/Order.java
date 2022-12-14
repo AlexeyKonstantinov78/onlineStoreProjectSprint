@@ -111,17 +111,5 @@ public class Order {
         this.person = person;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", number='" + number + '\'' +
-                ", count=" + count +
-                ", price=" + price +
-                ", dateTime=" + dateTime +
-                ", status=" + status +
-                ", product=" + product +
-                ", person=" + person +
-                '}';
-    }
+
 }

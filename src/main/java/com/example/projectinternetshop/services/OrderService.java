@@ -19,6 +19,10 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
+    public List<Order> allOrder() {
+        return orderRepository.findAll();
+    }
+
     public List<Order> allOrderPerson(Person person) {
         return orderRepository.findByPerson(person);
     }
@@ -30,6 +34,10 @@ public class OrderService {
 
     public List selectNumberOrderGroubBy(int idPerson) {
         return orderRepository.findByAllSelectNUmber(idPerson);
+    }
+
+    public List[] selectNumberOrderGroubBy() {
+        return orderRepository.findByAllSelectNUmber();
     }
 
 }
