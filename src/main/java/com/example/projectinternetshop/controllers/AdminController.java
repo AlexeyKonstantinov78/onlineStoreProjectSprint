@@ -176,24 +176,16 @@ public class AdminController {
         List<OrdersTitle> ordersTitleList = new ArrayList<>();
         List[] list = orderService.selectNumberOrderGroubBy();
 
-        System.out.println(list.length);
-
         for (List li: list) {
             String[] liSplit = li.toString().split(", ");
-//            System.out.println("id: " + liSplit[0].substring(1).trim() + " number: " + liSplit[1].trim() + " Даta: " + liSplit[2].substring(0, liSplit[2].length() - 1).trim());
+
             int id = Integer.parseInt(liSplit[0].substring(1).trim());
             String number = liSplit[1].substring(0).trim();
             LocalDate dateTime = LocalDate.parse(liSplit[2].substring(0, 10).trim());
 
-            System.out.println(number);
-//            System.out.println("" + id + ' ' + number + ' ' + dateTime);
-
             if (!ordersTitleListBoolean(number, ordersTitleList)) {
                 ordersTitleList.add(new OrdersTitle(id, getPerson(id), number, dateTime));
             }
-//            for (OrdersTitle orList :ordersTitleList) {
-//                if (orList.getPerson_id() != id)
-//            }
         }
         List<Order> orderList = orderService.allOrder();
 
