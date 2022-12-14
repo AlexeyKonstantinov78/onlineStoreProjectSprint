@@ -10,7 +10,7 @@
     <div class="container">
         <header th:insert="~{loyout :: header}"></header>
         <main class="status__main">
-            <h2>Перечень статусов товара</h2>
+            <h2>Перечень статусов заказа</h2>
             <hr>
             <ul class="status__ul">
                 <li class="status__li">Номер</li>
@@ -22,11 +22,11 @@
                         <p class="status__item_nameNumber" th:text="${item.getId()}"></p>
                         <p th:text="${item.getStatus()}"></p>
                     </div>
-                    <a class="btn" th:href="@{/admin/status/edit/{id}(id=${item.getId()})}">Редактировать статус</a>
+                    <a class="btn" th:href="@{/admin/status/edit/{id}(id=${item.getId()})}">Редактировать</a>
                 </div>
             </div>
             <hr>
-            <a class="btn" href="/admin/status/add">Добавление статуса</a>
+            <a class="btn" href="/admin/status/add">Добавить</a>
         </main>
         <footer th:insert="~{loyout :: footer}"></footer>
     </div>
