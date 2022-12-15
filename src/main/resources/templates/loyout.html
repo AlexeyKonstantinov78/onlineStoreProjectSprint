@@ -71,7 +71,7 @@
           <a th:if="!${person}" class="header__link" th:href="@{/auth/login}">Авторизоваться</a>
           <a th:if="${person}" class="header__link" >
               <form method="post" th:action="@{/logout}">
-                  <label for="form__exit" th:text="${person.getUsername()}"></label>
+                  <label for="form__exit" th:text="${person.getPerson().getName()}"></label>
                   <input type="submit" id="form__exit" value="Выйти"/>
               </form>
           </a>

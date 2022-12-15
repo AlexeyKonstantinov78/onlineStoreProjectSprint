@@ -24,7 +24,8 @@ public class PersonService {
     }
 
     public List<Person> getAll() {
-        return personRepository.findAll();
+
+        return personRepository.findByOrderByIdAsc();
     }
 
     public Person getPersonFindByLogin(Person person) {
