@@ -48,3 +48,7 @@
 .orders__product_name {
     width: 480px;
 }
+
+.orders__edit_select {
+    width: min-content;
+}
