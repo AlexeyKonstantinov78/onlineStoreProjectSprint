@@ -235,6 +235,17 @@ public class AdminController {
         return "admin/userInfo";
     }
 
+    @PostMapping("/users/info/{id}")
+    public String editUser(@PathVariable("id") int id, @RequestParam(value = "name", required = false) String name, @RequestParam(value = "role", required = false) String role) {
+
+        System.out.println("Name: " + name);
+        System.out.println("Роль: " + role);
+
+        personService.updatePersonNameAndRole(id, name, role);
+
+        return "redirect:/admin/users/info/{id}";
+    }
+
     protected Boolean ordersTitleListBoolean(String number,  List<OrdersTitle> ordersTitleList) {
         for (OrdersTitle list : ordersTitleList) {
             if (list.getNumber().equals(number)) {

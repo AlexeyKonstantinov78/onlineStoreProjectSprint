@@ -21,8 +21,10 @@
           <input class="input__form" type="text" th:field="*{name}" name="name" id="name">
           <button class="btn" type="submit">Изменить</button>
         </form>
+
         <p th:text="'Логин: ' + ${user.getLogin()}" ></p>
         <p th:text="'Пароль: ' + ${user.getPassword()}" ></p>
+
         <form class="form" th:method="post" th:action="@{/admin/users/info/{id}(id=${user.getId()})}" th:object="${user}">
           <label for="role">Роль: </label>
           <select class="input__form" name="role" id="role" th:field="*{role}">
