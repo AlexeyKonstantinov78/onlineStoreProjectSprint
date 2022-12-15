@@ -36,8 +36,10 @@ public class AdminController {
 
     private final PersonService personService;
 
+    private final RoleService roleService;
+
     public AdminController(ProductValidator productValidator, ProductService productService, CategoryService categoryService, StatusService statusService, OrderService orderService,
-                           ImageRepository imageRepository, PersonService personService) {
+                           ImageRepository imageRepository, PersonService personService, RoleService roleService) {
         this.productValidator = productValidator;
         this.productService = productService;
         this.categoryService = categoryService;
@@ -45,6 +47,7 @@ public class AdminController {
         this.orderService = orderService;
         this.imageRepository = imageRepository;
         this.personService = personService;
+        this.roleService = roleService;
     }
 
     //@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
@@ -228,6 +231,7 @@ public class AdminController {
         model.addAttribute("person", personDetails());
         model.addAttribute( "users_link_activ", "users_link_activ");
         model.addAttribute("user", personService.getPersonFinfById(id));
+        model.addAttribute("roles", roleService.findAll());
         return "admin/userInfo";
     }
 
