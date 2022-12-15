@@ -215,6 +215,22 @@ public class AdminController {
         return "redirect:/admin/orders";
     }
 
+    @GetMapping("/users")
+    public String allUsers(Model model) {
+        model.addAttribute("person", personDetails());
+        model.addAttribute( "users_link_activ", "users_link_activ");
+        model.addAttribute("users", personService.getAll());
+        return "admin/users";
+    }
+
+    @GetMapping("/users/info/{id}")
+    public String getUserInfo(@PathVariable("id")int id, Model model) {
+        model.addAttribute("person", personDetails());
+        model.addAttribute( "users_link_activ", "users_link_activ");
+        model.addAttribute("user", personService.getPersonFinfById(id));
+        return "admin/userInfo";
+    }
+
     protected Boolean ordersTitleListBoolean(String number,  List<OrdersTitle> ordersTitleList) {
         for (OrdersTitle list : ordersTitleList) {
             if (list.getNumber().equals(number)) {

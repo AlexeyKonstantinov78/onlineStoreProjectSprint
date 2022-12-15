@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Информация о пользователе</title>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<div class="container">
+  <header th:insert="~{loyout :: header}"></header>
+  <h2>Информация о пользователе</h2>
+  <hr>
+  <main class="users__main">
+    <div class="users__items">
+      <div class="users__item" >
+        <p th:text="'№ ' + ${user.getId()}" ></p>
+        <p th:text="'NikName: ' + ${user.getName()}" ></p>
+        <p th:text="'Логин: ' + ${user.getLogin()}" ></p>
+        <p th:text="'Пароль: ' + ${user.getPassword()}" ></p>
+        <p th:text="'Роль: ' + ${user.getRole()}" ></p>
+      </div>
+    </div>
+  </main>
+  <hr>
+  <footer th:insert="~{loyout :: footer}"></footer>
+</div>
+</body>
+</html>

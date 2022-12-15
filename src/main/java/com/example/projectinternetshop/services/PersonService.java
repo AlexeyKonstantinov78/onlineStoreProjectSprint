@@ -31,6 +31,11 @@ public class PersonService {
         Optional<Person> person_db = personRepository.findByLogin(person.getLogin());
         return person_db.orElse(null);
     }
+
+    public Person getPersonFinfById(int id) {
+        return personRepository.findById(id).orElse(null);
+    }
+
     @Transactional
     public void register(Person person) {
         person.setPassword(passwordEncoder.encode(person.getPassword()));

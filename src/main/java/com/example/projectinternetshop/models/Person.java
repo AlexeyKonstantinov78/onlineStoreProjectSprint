@@ -15,6 +15,9 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "name")
+    private String name;
+
     @NotEmpty(message = "Логин не может быть пустым")
     @Size(min = 5, max = 50, message = "Логин должен быть от 5 до 50 символов")
     @Column(name = "login")
@@ -38,7 +41,8 @@ public class Person {
     public Person() {
     }
 
-    public Person(String login, String password) {
+    public Person(String name, String login, String password) {
+        this.name = name;
         this.login = login;
         this.password = password;
     }
@@ -75,10 +79,35 @@ public class Person {
         this.role = role;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public List<Order> getOrederList() {
+        return orederList;
+    }
+
+    public void setOrederList(List<Order> orederList) {
+        this.orederList = orederList;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
