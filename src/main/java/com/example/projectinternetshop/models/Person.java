@@ -15,6 +15,7 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotEmpty(message = "Nik не может быть пустым")
     @Column(name = "name")
     private String name;
 

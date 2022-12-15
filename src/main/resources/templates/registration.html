@@ -14,6 +14,11 @@
         <h2>Регистрация</h2>
         <form class="form" th:method="post" th:action="@{/auth/registration}" th:object="${person}">
           <input class="input__form" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+          <label for="name">Введите Niknam: </label>
+          <input class="input__form" type="text" th:field="*{name}" placeholder="Введите nik" name="name" id="name">
+          <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
           <label for="login">Введите логин: </label>
           <input class="input__form" type="text" th:field="*{login}" placeholder="Введите логин" name="login" id="login">
           <div style="color: red" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></div>
