@@ -104,16 +104,6 @@ public class Person {
         this.orederList = orederList;
     }
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
-                ", products=" + products +
-                ", orederList=" + orederList +
-                '}';
-    }
+
+
 }

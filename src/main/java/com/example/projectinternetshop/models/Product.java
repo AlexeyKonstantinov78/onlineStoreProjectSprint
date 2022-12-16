@@ -149,5 +149,19 @@ public class Product {
         this.category = category;
     }
 
+    public List<Person> getPersonList() {
+        return personList;
+    }
 
+    public void setPersonList(List<Person> personList) {
+        this.personList = personList;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 }

@@ -1,7 +1,5 @@
 package com.example.projectinternetshop.models;
 
-
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,13 +10,16 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    @Column(name = "number")
     private String number;
 
+    @Column(name = "count")
     private int count;
 
+    @Column(name = "price")
     private float price;
 
+    @Column(name = "date_time")
     private LocalDateTime dateTime;
 
     @ManyToOne(optional = false)
