@@ -1,5 +1,32 @@
 .orders__main {
     min-height: 85vh;
+    position: relative;
+}
+
+.orders__main h2 {
+    margin-bottom: 20px;
+}
+
+.orders__search {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.orders__search_input {
+    border-radius: 14px;
+    width: 300px;
+    display: inline-block;
+    padding: 5px 5px 5px 10px ;
+    cursor: pointer;
+}
+
+.orders__search button {
+    position: absolute;
+    top: 2px;
+    right: 6px;
+    background-color: transparent;
+    border-color: transparent;
 }
 
 .orders__items {
@@ -43,6 +70,7 @@
     box-shadow: inset 0px 1px 2px 3px #989898;
     font-size: 16px;
     font-weight: 500;
+
 }
 
 .orders__product_name {
@@ -51,4 +79,7 @@
 
 .orders__edit_select {
     width: min-content;
+}
+
+.search__rezult {
 }

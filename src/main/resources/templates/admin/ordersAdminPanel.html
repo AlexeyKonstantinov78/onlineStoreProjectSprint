@@ -10,7 +10,17 @@
 <div class="container">
   <header th:insert="~{loyout :: header}"></header>
   <main class="orders__main">
+
     <h2>Заказы</h2>
+
+    <div class="orders__search">
+      <input class="orders__search_input" type="search" name="search" id="orders_search">
+      <button type="submit">
+        <img width="25px" th:src="@{/img/search.png}" alt="search">
+      </button>
+    </div>
+    <div class="search__rezult orders__items">
+    </div>
     <hr>
     <div class="orders__items">
       <div class="orders__item" th:each="orderTitle: ${ordersTitle}">
