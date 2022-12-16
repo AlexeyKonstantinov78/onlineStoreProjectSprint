@@ -8,9 +8,11 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "file_name")
     private String fileName;
 
     @ManyToOne(fetch = FetchType.EAGER, optional=false)
+    @JoinColumn(name = "product_id")
     private Product product;
 
     public Image(String fileName, Product product) {
@@ -44,6 +46,7 @@ public class Image {
     public void setProduct(Product product) {
         this.product = product;
     }
+
 
 
 }

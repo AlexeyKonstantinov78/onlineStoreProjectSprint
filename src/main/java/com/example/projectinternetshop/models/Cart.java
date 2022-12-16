@@ -47,12 +47,6 @@ public class Cart {
         this.productId = productId;
     }
 
-    @Override
-    public String toString() {
-        return "Cart{" +
-                "id=" + id +
-                ", personId=" + personId +
-                ", productId=" + productId +
-                '}';
-    }
+
+
 }

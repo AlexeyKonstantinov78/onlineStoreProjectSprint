@@ -12,6 +12,7 @@ public class Status {
     private int id;
 
     @NotEmpty(message = "Статус не может быть пустым")
+    @Column(name = "status")
     private String status;
 
     @OneToMany(mappedBy = "status")
@@ -40,15 +41,5 @@ public class Status {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    public List<Order> getOrderList() {
-        return orderList;
-    }
-
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
-    }
-
-
 
 }

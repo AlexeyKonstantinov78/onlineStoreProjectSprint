@@ -8,7 +8,7 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    @Column(name = "name_role")
     private String nameRole;
 
 
@@ -27,4 +27,6 @@ public class Role {
     public void setNameRole(String nameRole) {
         this.nameRole = nameRole;
     }
+
+
 }

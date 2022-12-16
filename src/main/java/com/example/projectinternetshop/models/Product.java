@@ -1,5 +1,7 @@
 package com.example.projectinternetshop.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -36,11 +38,13 @@ public class Product {
     @NotEmpty(message = "Продовец не может быть пустым")
     private String seller;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "product")
     private List<Image> imageList  = new ArrayList<>();
 
     @NotNull(message = "Вы не выбрали категорию!!!")
-    @ManyToOne(optional = false)
+    @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @ManyToMany
@@ -125,14 +129,6 @@ public class Product {
         this.seller = seller;
     }
 
-    public List<Image> getImageList() {
-        return imageList;
-    }
-
-    public void setImageList(List<Image> imageList) {
-        this.imageList = imageList;
-    }
-
     public LocalDateTime getDateTimeOfCreated() {
         return dateTimeOfCreated;
     }
@@ -149,19 +145,11 @@ public class Product {
         this.category = category;
     }
 
-    public List<Person> getPersonList() {
-        return personList;
+    public List<Image> getImageList() {
+        return imageList;
     }
 
-    public void setPersonList(List<Person> personList) {
-        this.personList = personList;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setImageList(List<Image> imageList) {
+        this.imageList = imageList;
     }
 }

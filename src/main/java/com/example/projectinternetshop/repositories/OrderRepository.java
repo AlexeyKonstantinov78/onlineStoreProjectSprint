@@ -5,13 +5,14 @@ import com.example.projectinternetshop.models.OrdersTitle;
 import com.example.projectinternetshop.models.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Integer> {
+public interface OrderRepository extends JpaRepository<Order, Integer>, CrudRepository<Order, Integer> {
     List<Order> findByPerson(Person person);
 
     @Query(value = "select number from orders where person_id=?1 group by number", nativeQuery = true)

@@ -1,5 +1,7 @@
 package com.example.projectinternetshop.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
@@ -24,6 +26,7 @@ public class Person {
     @Column(name = "login")
     private String login;
 
+    @JsonIgnore
     @NotEmpty(message = "Пароль не может быть пустым")
     @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).*$", message = "пароль не соответсвует правилу cтрочные и прописные латинские буквы, цифры'")
     @Column(name = "password")
@@ -87,23 +90,5 @@ public class Person {
     public void setName(String name) {
         this.name = name;
     }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public List<Order> getOrederList() {
-        return orederList;
-    }
-
-    public void setOrederList(List<Order> orederList) {
-        this.orederList = orederList;
-    }
-
-
 
 }

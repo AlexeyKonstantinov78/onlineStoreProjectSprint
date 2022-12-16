@@ -40,6 +40,7 @@ public class MainController {
     public String infoProduct(@PathVariable("id") int id, Model model) {
 
         model.addAttribute("product", productService.getProductById(id));
+        model.addAttribute("person", personDetails());
 
         try {
             if (personDetails().getPerson().getRole().equals("ROLE_USER")) {

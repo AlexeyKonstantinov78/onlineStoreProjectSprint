@@ -1,5 +1,7 @@
 package com.example.projectinternetshop.models;
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,13 +24,15 @@ public class Order {
     @Column(name = "date_time")
     private LocalDateTime dateTime;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
+    @JoinColumn(name = "status_id")
     private Status status;
-
-    @ManyToOne(optional = false)
+    @ManyToOne
+    @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
+    @JoinColumn(name = "person_id")
     private Person person;
 
     public Order() {
@@ -111,6 +115,4 @@ public class Order {
     public void setPerson(Person person) {
         this.person = person;
     }
-
-
 }
