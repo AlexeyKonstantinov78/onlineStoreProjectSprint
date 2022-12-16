@@ -46,8 +46,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //.csrf().disable()
                 .authorizeRequests()
                 // данная страница доступна с ролью admin
-                .antMatchers("/admin").hasAnyRole("ADMIN")
-                .antMatchers("/auth/login", "/error", "/auth/registration", "/product", "/product/info/{id}", "/img/**", "/css/**", "/js/**", "/product/search", "/api/orders", "/api/orders/search").permitAll()
+                .antMatchers("/admin", "/api/orders", "/api/orders/search").hasAnyRole("ADMIN")
+                .antMatchers("/auth/login", "/error", "/auth/registration", "/product", "/product/info/{id}", "/img/**", "/css/**", "/js/**", "/product/search").permitAll()
                 // все остальные страницы доступны с ролью user и admin
                 .anyRequest().hasAnyRole("USER", "ADMIN")
 //                //для всех остальных страниц необхадима авторизация
