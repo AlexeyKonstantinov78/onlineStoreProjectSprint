@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Integer>, CrudRepository<Order, Integer> {
+public interface OrderRepository extends JpaRepository<Order, Integer>{
     List<Order> findByPerson(Person person);
 
     @Query(value = "select number from orders where person_id=?1 group by number", nativeQuery = true)
@@ -23,4 +23,10 @@ public interface OrderRepository extends JpaRepository<Order, Integer>, CrudRepo
 
     @Query(value = "select person_id, number, date_time from orders group by person_id, date_time, number order by date_time desc , number desc", nativeQuery = true)
     List[] findByAllSelectNUmber();
+
+    @Query(value = "select * from orders where number like %?1", nativeQuery = true)
+    List<Order> findByNumberContainingFromtheEnd(String search);
+
+    List<Order> findByNumberContaining(String search);
+
 }

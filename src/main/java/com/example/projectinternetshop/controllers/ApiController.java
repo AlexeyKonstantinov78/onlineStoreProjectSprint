@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,16 +44,12 @@ public class ApiController {
         return orderService.allOrder();
     }
 
-    @GetMapping("/q")
-    public List<Order> getSarchOrders(@PathVariable(value = "q", required = false) String search) throws Exception {
-        List<OrderOutput> orderOutputs = new ArrayList<>();
-        List<Order> orderList = orderService.allOrder();
+    @GetMapping("/orders/search")
+    public List<Order> getSarchOrders(@RequestParam(name = "q", required = false) String search) throws Exception {
 
-        for (Order order: orderList) {
-            orderOutputs.add(new OrderOutput(order.getId(), order.getNumber(), order.getCount(), order.getPrice(),order.getDateTime(), order.getStatus().getStatus(), order.getProduct().getTitle(), order.getPerson().getName()));
-        }
+        System.out.println(search);
 
-        return orderService.allOrder();
+        return orderService.searchFourEndNumber(search.trim());
     }
 
 

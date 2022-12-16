@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -44,6 +45,13 @@ public class OrderService {
 
     public List[] selectNumberOrderGroubBy() {
         return orderRepository.findByAllSelectNUmber();
+    }
+
+    public List<Order> searchFourEndNumber(String search) {
+
+
+        return orderRepository.findByNumberContainingFromtheEnd(search);
+//        return orderRepository.findByNumberContaining(search);
     }
 
     @Transactional
